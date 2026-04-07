@@ -14,6 +14,7 @@
       --grain-opacity: 0.045;
       --font-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
       --font-display: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --overlay-safe: 248px; /* reserved space for DM + robot */
     }
 
     [data-theme="light"] {
@@ -213,7 +214,7 @@
       justify-content: center;
       overflow: hidden;
       padding-top: 64px; /* reserve space for top marquee */
-      padding-bottom: 190px; /* reserve space for bottom overlay (DM + robot) */
+      padding-bottom: var(--overlay-safe); /* reserve space for bottom overlay (DM + robot) */
     }
 
     /* Reels feel: vertical safe frame on wide screens */
@@ -458,6 +459,11 @@
       }
     }
 
+    /* prevent overlap on shorter reels */
+    @media (max-height: 720px) {
+      :root { --overlay-safe: 280px; }
+    }
+
     .chips {
       display: flex;
       flex-wrap: wrap;
@@ -501,7 +507,7 @@
       align-items: center;
       justify-content: center;
       gap: 0.65rem;
-      margin-top: 0.35rem;
+      margin-top: 0.2rem;
       animation: fadeUp 1s var(--ease-out-expo) 1.05s both;
     }
 
@@ -536,7 +542,7 @@
       border-radius: 16px;
       border: 1px solid rgba(129,140,248,0.16);
       background: rgba(255,255,255,0.03);
-      padding: 0.75rem 0.75rem 0.7rem;
+      padding: 0.65rem 0.65rem 0.6rem;
       backdrop-filter: blur(10px);
       box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
     }
@@ -709,6 +715,7 @@
       display: grid;
       gap: 10px;
       justify-items: center;
+      padding-bottom: 6px;
     }
 
     .aiHud::before {
@@ -1031,7 +1038,7 @@
         height: clamp(150px, 28vw, 230px);
       }
       .content {
-        padding-bottom: 160px;
+        padding-bottom: 230px;
       }
       .brand {
         font-size: clamp(1.55rem, 7vw, 2.4rem);
