@@ -276,6 +276,7 @@
       height: clamp(190px, 34vw, 320px);
       color: var(--text);
       animation: logoReveal 1.4s var(--ease-out-expo) 0.15s both;
+      margin-bottom: -0.35rem; /* tighten logo -> title spacing */
     }
 
     @keyframes logoReveal {
@@ -522,29 +523,23 @@
     }
 
     .services__grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; /* equal left/right spacing */
       gap: 0.6rem;
       width: 100%;
     }
 
-    /* 3 cards look better centered */
-    @media (min-width: 421px) {
-      .services__grid > .svcCard:nth-child(3) {
-        grid-column: 1 / -1;
-        max-width: 360px;
-        margin: 0 auto;
-      }
-    }
-
     .svcCard {
-      text-align: left;
-      border-radius: 16px;
+      text-align: center;
+      border-radius: 999px;
       border: 1px solid rgba(129,140,248,0.16);
       background: rgba(255,255,255,0.03);
       padding: 0.65rem 0.65rem 0.6rem;
       backdrop-filter: blur(10px);
       box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+      flex: 0 0 auto;
+      min-width: 160px;
     }
 
     .svcCard__h {
@@ -1089,21 +1084,11 @@
       <div class="hudTicker"><span>Neural pipeline · semantic search · agents · automation · realtime builds</span></div>
     </div>
 
-    <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme">
-      <svg class="icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <circle cx="12" cy="12" r="4" />
-        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-      </svg>
-      <svg class="icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-      </svg>
-    </button>
-
     <div class="reelFrame">
       <div class="content">
       <div class="logo-wrap is-single">
         <!-- Using your existing logos in /images -->
-        <img style="width: 16rem; height: 16rem;" class="logo-light" src="Images/dark-bg.png" alt="Vernexify Technologies" width="260" height="260" />
+        <img style="width: 16rem;" class="logo-light" src="Images/dark-bg.png" alt="Vernexify Technologies" width="260" height="260" />
         <!-- <img class="logo-dark" src="Images/dark-bg.png" alt="Vernexify Technologies" width="260" height="260" /> -->
         <div class="logo-fallback" id="logoFallback" aria-hidden="true">
           <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -1149,10 +1134,10 @@
           </div>
         </div>
       </div>
-      <div class="cta-row">
+      <!-- <div class="cta-row">
         <a class="cta primary" href="mailto:hello@vernexify.com">Start a project</a>
         <a class="cta" href="mailto:hello@vernexify.com?subject=Partnership">Partner with us</a>
-      </div>
+      </div> -->
     </div>
       <div class="reelOverlay" aria-hidden="true">
         <div class="reelOverlay__stack">
@@ -1253,12 +1238,6 @@
         img.addEventListener("load", updateLogoFallback);
       });
       updateLogoFallback();
-
-      document.getElementById("themeToggle").addEventListener("click", function () {
-        var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-        applyTheme(next);
-        requestAnimationFrame(updateLogoFallback);
-      });
 
       // GSAP cinematic timeline
       if (window.gsap) {
